@@ -1,6 +1,6 @@
 # Script to perform Bayesian Ridge Regression with g prior and selection for mixtures
 # author: "Jingxuan He"
-# last updated: 8/05/22
+# last updated: 8/25/22
 
 
 
