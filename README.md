@@ -13,4 +13,4 @@ To use BHRM function, input variables are defined as:
 
 An example of the function call is:
 
-`BHRM-g(X=X.obs, Y=Y, U=U, LOD=LOD, profiles=profiles, family = "gaussian")`
+`BHRM.g(X=X.obs, Y=Y, U=U, LOD=LOD, profiles=profiles, family = "gaussian")`
