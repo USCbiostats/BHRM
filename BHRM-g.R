@@ -2,15 +2,6 @@
 # author: "Jingxuan He"
 # last updated: 8/05/22
 
-# Description:
-
-# input variables
-# X: A NxP matrix of exposures for mixture analysis (on the original scale with NA's for individuals with BLD)
-# Y: A N-length vector for a continuous outcome
-# U: A NxQ matrix of covariates (variables included in the regression model but not included in the g-estimation)
-# LOD: A P-length vector of LODs for each exposure. Individuals with missing data will have data imputed below this level of detection  
-# profiles: A 2xP matrix of two counterfactual profiles of exposures for which a potential outcomes risk difference is calculated (as the expsoures are standardized wihin the funciton, these profiles should be on the standard normal scale)
-# family: a character string representing the type of outcome. Choose between "gaussian" or "binomial"
 
 
 library(R2jags)
@@ -173,7 +164,7 @@ BHRM.logistic.model <-
 
 
 
-BHRMA.g <- function(X=NULL, Y=NULL, U=NULL, LOD=NULL, profiles=NULL, family = NULL) {
+BHRM.g <- function(X=NULL, Y=NULL, U=NULL, LOD=NULL, profiles=NULL, family = NULL) {
   N <- length(Y)
   P <- ncol(X)
   Q <- ncol(U)
@@ -242,6 +233,5 @@ BHRMA.g <- function(X=NULL, Y=NULL, U=NULL, LOD=NULL, profiles=NULL, family = NU
   return(BHRM.results)
 }
 
-# example function call:
-# BHRMA(X=X.obs, Y=Y, U=U, LOD=LOD, profiles=profiles, family = "gaussian")
+
 
