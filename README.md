@@ -7,7 +7,8 @@ BHMR approach yields conditional individual exposure-specific estimates along wi
 3) Bayesian g-computation in a potential outcome framework for estimating the overall mixture effect based on two specified exposure profiles. 
 
 ### Method
-
+Suppose we have a model with p exposures and q covariates:
+$$g(\mu_i)=\alpha+\sum_{j=1}^{p}\gamma_j\beta_jX_j+\sum_{k=1}^{q}{\delta_kU_k}+\epsilon_i,\ \ i=1,\ldots n,$$
 
 ### R function
 Furthermore, the function incorporate a imputation procedure using normal distribution so that we can automatically impute the missings whose values are below the limit of detection (LOD).
