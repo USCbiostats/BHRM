@@ -1,11 +1,15 @@
 # BHRM
 
-
+### Introduction
 BHMR approach yields conditional individual exposure-specific estimates along with an estimate of the overall effect of the mixture. While BHRM is a broad framework of statistical models, our implementation of BHRM combines :
 1) a g-prior for the corresponding exposure effects to provide robust estimation of highly correlated exposures; 
 2) a Bayesian selection procedure to estimate the posterior inclusion probability of individual exposures;
 3) Bayesian g-computation in a potential outcome framework for estimating the overall mixture effect based on two specified exposure profiles. 
 
+### Method
+
+
+### R function
 Furthermore, the function incorporate a imputation procedure using normal distribution so that we can automatically impute the missings whose values are below the limit of detection (LOD).
 
 To use BHRM function, input variables are defined as: 
