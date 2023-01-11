@@ -28,7 +28,7 @@ $$\alpha|\ \boldsymbol{Y},\ \mathbf{\gamma}\sim N\ (\widehat{\alpha_\mathbf{\gam
 where $\ \widehat{\beta_\mathbf{\gamma}}$ is the MLE estimators for $\mathcal{M}_\boldsymbol{\gamma}$. We can see that scalar g controls the conditional posterior mean shrink from the MLE estimator to prior mean zero. Also, the dispersion of the posterior covariance shrinks by the factor of $g/(1\ +\ g)$. Within this framework, the posterior inclusion probability (PIP) on the individual $\gamma_j$ is the posterior probability that the coefficient is non-zero. In this case, the Bayesian selection algorithm is combined with the shrinkage factor for g-priors to yield optimal prediction performance. For our BHMR, we adapted the semi-Bayes fixed $g$ prior that is pre-specified with a constant according to the level of the desired shrinkage.
 
 To obtain coefficient estimations, we used the MCMC simulation method for Bayesian hierarchical models through Just another Gibbs sampler (JAGS) coding scheme. After obtaining coefficients estimations, we utilized $g$ computation to yield a single effect estimate using:(e.g., a mixtures effect) that captures the impact of one standard deviation increase in levels of all exposures simultaneously. Specifically, we use posterior predictive distributions to estimate a single mixture risk difference ($\psi_{RD}$) based on two exposure profiles, such that:
-$$\psi_{RD} =  \psi_{x\ast\ =high}-\psi_{x\ast=low}$$.
+$$\psi_{RD} =  \psi_{x\ast\ =high}-\psi_{x\ast=low}.$$
 
 
 ### R function
@@ -65,6 +65,7 @@ results <- BHRM(X=X,Y=Y,U=U,profiles=profiles,
                 family = family, w=w,
                 n.adapt=5000, n.burnin=5000, n.sample=5000)
 ```
+<img src="https://user-images.githubusercontent.com/33040114/211767507-9d618aaa-5497-49fa-908f-c35cb8201b84.png" width="290" height="300">
 
 #### Model with interaction term
 ```{r}
@@ -86,4 +87,4 @@ results <- BHRM.interaction(X=X,Y=Y,U=U,profiles=profiles,
                 family = family, w=w,
                 n.adapt=5000, n.burnin=5000, n.sample=5000)
 ```
-
+<img src="https://user-images.githubusercontent.com/33040114/211767549-ae6308ca-e41d-42e7-9719-d76a310e00a8.png" width="300" height="600">
