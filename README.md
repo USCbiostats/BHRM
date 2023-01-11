@@ -58,7 +58,7 @@ results <- BHRM(X=X,Y=Y,U=U,profiles=profiles,
                 n.adapt=5000, n.burnin=5000, n.sample=5000)
 ```
 
-![result](/Users/joyce/Documents/USC/Research/mixtures analysis/results.png)
+![plot](/Users/joyce/Documents/USC/Research/mixtures analysis/results.png)
 
 #### Model with interaction term
 ```{r}
