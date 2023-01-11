@@ -13,10 +13,9 @@ where $X_j$ is an exposure with the corresponding estimate $\beta_j$, $\gamma_j$
 
 To incorporate the g-prior into the model, we interpret the regression model into a Bayesian setting under model $\mathcal{M}_\boldsymbol{\gamma}$. Assume we have a continuous outcome:
 
-$$\boldsymbol{Y}\ |\ \alpha,\mathbf{\beta},\phi,\mathbf{\gamma}\sim N(\mathbf{1}\ \alpha+X_\mathbf{\gamma}\beta_\mathbf{\gamma},\ \phi^{-1}\boldsymbol{I}\ \ )$$
+$$\boldsymbol{Y}\ |\ \alpha,\mathbf{\beta},\phi,\mathbf{\gamma}\sim N(\mathbf{1}\ \alpha+X_\mathbf{\gamma}\beta_\mathbf{\gamma},\ \phi^{-1}\boldsymbol{I}\ \ ) \\
 
-
-$$\mathbf{\beta}_\mathbf{\gamma}\sim\mathrm{N}\left(0,g\phi^{-1}\left({\boldsymbol{X}_\boldsymbol{\gamma}}^\prime\boldsymbol{X}_\boldsymbol{\gamma}\right)^{-1}\right)$$,
+\mathbf{\beta}_\mathbf{\gamma}\sim\mathrm{N}\left(0,g\phi^{-1}\left({\boldsymbol{X}_\boldsymbol{\gamma}}^\prime\boldsymbol{X}_\boldsymbol{\gamma}\right)^{-1}\right)$$,
 
 
 To obtain coefficient estimations, we used the MCMC simulation method for Bayesian hierarchical models through Just another Gibbs sampler (JAGS) coding scheme. After obtaining coefficients estimations, we utilized $g$ computation to yield a single effect estimate using:(e.g., a mixtures effect) that captures the impact of one standard deviation increase in levels of all exposures simultaneously. Specifically, we use posterior predictive distributions to estimate a single mixture risk difference ($\psi_{RD}$) based on two exposure profiles, such that:
