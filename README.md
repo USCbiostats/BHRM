@@ -11,7 +11,8 @@ Suppose we have a model with p exposures and q covariates:
 $$g(\mu_i)=\alpha+\sum_{j=1}^{p}\gamma_j\beta_jX_j+\sum_{k=1}^{q}{\delta_kU_k}+\epsilon_i,\ \ i=1,\ldots n,$$
 where $X_j$ is an exposure with the corresponding estimate $\beta_j$, $\gamma_j$ is a binary variable indicating the inclusion of a specific exposure $j$ in the mixture, and $U_k$ is a covariate with corresponding effect estimates $\delta_k$. Specifically, $\boldsymbol{\gamma}=\left(\gamma_1,\ldots,\gamma_p\right)$ is a vector with element $\gamma_j\in(0,1)$  which indicates if variable $X_j$ should be included in the model $\mathcal{M}_\gamma (\gamma_j=0 equals \beta_j=0)$. And we chose the Beta-Binomial distribution with the function of p as the prior for $\boldsymbol{\gamma}$.
 
-To incorporate the g-prior into the model, we interpret the regression model into a Bayesian setting under model$\mathcal{M}_\boldsymbol{\gamma}$. Assume we have a continuous outcome:
+To incorporate the g-prior into the model, we interpret the regression model into a Bayesian setting under model $\mathcal{M}_\boldsymbol{\gamma}$. Assume we have a continuous outcome:
+
 $$\boldsymbol{Y}\ |\ \alpha,\mathbf{\beta},\phi,\mathbf{\gamma}\sim N(\mathbf{1}\ \alpha+X_\mathbf{\gamma}\beta_\mathbf{\gamma},\ \phi^{-1}\boldsymbol{I}\ \ )$$
 
 
