@@ -17,6 +17,14 @@ $$\boldsymbol{Y}\ |\ \alpha,\mathbf{\beta},\phi,\mathbf{\gamma}\sim N(\mathbf{1}
 
 $$\mathbf{\beta}_\mathbf{\gamma}\sim\mathrm{N}\left(0,g\phi^{-1}\left({\boldsymbol{X}_\boldsymbol{\gamma}}^\prime\boldsymbol{X}_\boldsymbol{\gamma}\right)^{-1}\right)$$
 
+where prior covariance of $\mathbf{\beta}$ is specified as the scaled version of the covariance matrix of the MLE estimator and a function of the variance of the outcome $\phi^{-1}$. We can derive the posterior distributions:
+
+$$\mathbf{\beta}_\mathbf{\gamma}|\boldsymbol{Y},\ \alpha,\ \phi,\ \mathbf{\gamma}\sim N\ (\frac{g}{1+g}\ \widehat{\beta_\mathbf{\gamma}}$$
+
+$$\phi^{-1}\frac{g}{1+g}\left({\boldsymbol{X}_\boldsymbol{\gamma}}^\prime\boldsymbol{X}_\boldsymbol{\gamma}\right)^{-1})$$
+
+$$\alpha|\ \boldsymbol{Y},\ \mathbf{\gamma}\sim N\ (\widehat{\alpha_\mathbf{\gamma}},\ \phi^{-1}\left({\boldsymbol{X}_\boldsymbol{\gamma}}^\prime\boldsymbol{X}_\boldsymbol{\gamma}\right)^{-1})$$
+where $\ \widehat{\beta_\mathbf{\gamma}}$ is the MLE estimators for $\mathcal{M}_\boldsymbol{\gamma}$. We can see that scalar g controls the conditional posterior mean shrink from the MLE estimator to prior mean zero. Also, the dispersion of the posterior covariance shrinks by the factor of $g/(1\ +\ g)$. Within this framework, the posterior inclusion probability (PIP) on the individual $\gamma_j$ is the posterior probability that the coefficient is non-zero. In this case, the Bayesian selection algorithm is combined with the shrinkage factor for g-priors to yield optimal prediction performance. For our BHMR, we adapted the semi-Bayes fixed $g$ prior that is pre-specified with a constant according to the level of the desired shrinkage.
 
 To obtain coefficient estimations, we used the MCMC simulation method for Bayesian hierarchical models through Just another Gibbs sampler (JAGS) coding scheme. After obtaining coefficients estimations, we utilized $g$ computation to yield a single effect estimate using:(e.g., a mixtures effect) that captures the impact of one standard deviation increase in levels of all exposures simultaneously. Specifically, we use posterior predictive distributions to estimate a single mixture risk difference ($\psi_{RD}$) based on two exposure profiles, such that:
 $$\psi_{RD} =  \psi_{x\ast\ =high}-\psi_{x\ast=low}$$.
