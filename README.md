@@ -19,9 +19,7 @@ $$\mathbf{\beta}_\mathbf{\gamma}\sim\mathrm{N}\left(0,g\phi^{-1}\left({\boldsymb
 
 where prior covariance of $\mathbf{\beta}$ is specified as the scaled version of the covariance matrix of the MLE estimator and a function of the variance of the outcome $\phi^{-1}$. We can derive the posterior distributions:
 
-$$\mathbf{\beta}_\mathbf{\gamma}|\boldsymbol{Y},\ \alpha,\ \phi,\ \mathbf{\gamma}\sim N\ (\frac{g}{1+g}\ \widehat{\beta_\mathbf{\gamma}}$$
-
-$$\phi^{-1}\frac{g}{1+g}\left({\boldsymbol{X}_\boldsymbol{\gamma}}^\prime\boldsymbol{X}_\boldsymbol{\gamma}\right)^{-1})$$
+$$\mathbf{\beta}_\mathbf{\gamma}|\boldsymbol{Y},\ \alpha,\ \phi,\ \mathbf{\gamma}\sim N\ (\frac{g}{1+g}\ \widehat{\beta_\mathbf{\gamma}}, \ \phi^{-1}\frac{g}{1+g}\left({\boldsymbol{X}_\boldsymbol{\gamma}}^\prime\boldsymbol{X}_\boldsymbol{\gamma}\right)^{-1})$$
 
 $$\alpha|\ \boldsymbol{Y},\ \mathbf{\gamma}\sim N\ (\widehat{\alpha_\mathbf{\gamma}},\ \phi^{-1}\left({\boldsymbol{X}_\boldsymbol{\gamma}}^\prime\boldsymbol{X}_\boldsymbol{\gamma}\right)^{-1})$$
 
