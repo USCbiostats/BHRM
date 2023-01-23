@@ -2,16 +2,6 @@
 # author: "Jingxuan He and David Conti"
 # last updated: 11/29/22
 
-# Description:
-
-# input variables
-# X: A NxP matrix of exposures for mixture analysis (on the original scale and we assume that there are no missing values)
-# Y: A N-length vector for a continuous outcome
-# U: A NxQ matrix of covariates (variables included in the regression model but not included in the g-estimation or model selection)
-# profiles: A 2xP matrix of two counterfactual profiles of exposures for which a potential outcomes risk difference is calculated (as the exposures are assumed to be standardized, these profiles should be on the standard normal scale)
-# family: a character string representing the type of outcome. Choose between "gaussian" or "binomial"
-# weight for g-prior: w -> 0 shrink to common mean; as w -> 1 toward the maximum likelihood estimate
-
 library(R2jags)
 
 # Functions
