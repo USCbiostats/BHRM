@@ -5,7 +5,7 @@
 library(R2jags)
 
 # Functions
-# JAGS model
+# JAGS framework that specifies the Bayesian model
 BHRM.gaussian.interaction.model <- 
   "model {
   for(i in 1:N) {
@@ -102,6 +102,7 @@ BHRM.logistic.interaction.model <-
   
 }"
 
+# MCMC procedure to update the Bayesian parameters and get the estimates for the model
 BHRM.interaction <- function(X=NULL, Y=NULL, U=NULL, profiles=NULL, family = "gaussian", w=0.9, n.adapt=5000, n.burnin=5000, n.sample=5000) {
   N <- length(Y)
   P <- ncol(X)
@@ -125,7 +126,7 @@ BHRM.interaction <- function(X=NULL, Y=NULL, U=NULL, profiles=NULL, family = "ga
   
   ### g prior model inputs
   prop.mu.beta <- rep(0, P)
-  prop.sd.beta <- univariate.results[,"Std. Error"]
+  prop.sd.beta <- univariate.results[,"Std. Error"]   # estimate the SD using univariate results
   XtX <- t(as.matrix(X))%*%as.matrix(X) 
   
   # run jags
