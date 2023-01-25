@@ -5,7 +5,7 @@
 library(R2jags)
 
 # Functions
-# JAGS model
+# JAGS framework that specifies the Bayesian model
 BHRM.gaussian.model <- 
   "model {
   for(i in 1:N) {
@@ -84,6 +84,7 @@ BHRM.logistic.model <-
   
 }"
 
+# MCMC procedure to update the Bayesian parameters and get the estimates for the model
 BHRM <- function(X=NULL, Y=NULL, U=as.matrix(rep(0, dim(X)[1])), profiles=NULL, family = "gaussian", w=0.9, n.adapt=5000, n.burnin=5000, n.sample=5000) {
   N <- length(Y)
   P <- ncol(X)
@@ -97,10 +98,10 @@ BHRM <- function(X=NULL, Y=NULL, U=as.matrix(rep(0, dim(X)[1])), profiles=NULL, 
   
   ### g prior model inputs
   prop.mu.beta <- rep(0, P)
-  prop.sd.beta <- univariate.results[,"Std. Error"]
+  prop.sd.beta <- univariate.results[,"Std. Error"]   # estimate the SD using univariate results
   XtX <- t(as.matrix(X))%*%as.matrix(X) 
   
-  # run jags
+  ### run jags
   jags.model.text <- ifelse(family=="gaussian", BHRM.gaussian.model, BHRM.logistic.model)
   jdata <- list(N=N, Y=Y, X=X, U=U, P=P, Q=Q, profiles=profiles, XtX=XtX, w=w, prop.mu.beta=prop.mu.beta, prop.sd.beta=prop.sd.beta)
   var.s <- c("beta", "gamma", "eta.low", "eta.high",  "psi")
@@ -108,7 +109,7 @@ BHRM <- function(X=NULL, Y=NULL, U=as.matrix(rep(0, dim(X)[1])), profiles=NULL, 
   update(model.fit, n.iter=n.burnin, progress.bar="none")
   model.fit <- coda.samples(model=model.fit, variable.names=var.s, n.iter=n.sample, thin=1, progress.bar="none")
   
-  # summarize results
+  ### summarize results
   r <- summary(model.fit)
   BHRM.results <- data.frame(round(r$statistics[,1:2],3), round(r$quantiles[,c(1,5)],3))
   wald = abs(BHRM.results[,"Mean"]/BHRM.results[,"SD"])
