@@ -38,7 +38,10 @@ To use BHRM function, input variables are defined as:
 * U: A NxQ matrix of covariates (variables included in the regression model but not included in the g-estimation or model selection)
 * profiles: A 2xP matrix of two counterfactual profiles of exposures for which a potential outcomes risk difference is calculated (as the exposures are assumed to be standardized, these profiles should be on the standard normal scale)
 * family: a character string representing the type of outcome. Choose between "gaussian" or "binomial"
-* weight for g-prior: w -> 0 shrink to common mean; as w -> 1 toward the maximum likelihood estimate
+* w: weight for g-prior: w -> 0 shrink to common mean; as w -> 1 toward the maximum likelihood estimate
+* n.adapt: number of iterations for the adaptation
+* n.burnin: length of burn-in
+* n.sample: number of random samples draws
 
 Output variables are defined as: 
 * beta: estimated coefficients for exposures effect
@@ -60,16 +63,17 @@ We demonstrate the use of BHRM by following examples:
 library(MASS)
 # run the BHRM.g R script first
 # generate example data:
-numInd <- 1000
-numE <- 5
-numCov <- 2
-family="gaussian"   # {"gaussian", "binomial"}
-w <- 0.9
+numInd <- 1000   # number of observations
+numE <- 5   # number of dxposures
+numCov <- 2   # number of covariates 
+family="gaussian"   # Choose the model/outcome type from {"gaussian", "binomial"}
+w <- 0.9   # Specify the g-prior weight parameter. The overall shrinkage parameter G = w/(1-w)
 
-X <- mvrnorm(n=numInd, mu=rep(0,numE), Sigma=diag(numE))
-Y <- ifelse(rep(family,numInd)=="gaussian", rnorm(numInd, 0, 1), rbinom(numInd, 1, .5))
-U <- mvrnorm(n=numInd, mu=rep(0,numCov), Sigma=diag(numCov))
-profiles <- rbind(rep(-0.5,numE), rep(0.5, numE))
+X <- mvrnorm(n=numInd, mu=rep(0,numE), Sigma=diag(numE))   # generate exposures data
+Y <- ifelse(rep(family,numInd)=="gaussian", rnorm(numInd, 0, 1), rbinom(numInd, 1, .5))   # generate outcome data
+U <- mvrnorm(n=numInd, mu=rep(0,numCov), Sigma=diag(numCov))   # generate covariates data
+profiles <- rbind(rep(-0.5,numE), rep(0.5, numE))   # specify the contrasting profile (e.g., from -0.5 vs. 0.5)
+n.adapt=5000; n.burnin=5000; n.sample=5000;   # specify the number of iterations for the adaptation, length of burn-in, and the number of random samples
 
 
 # run BHRM analysis
@@ -84,19 +88,19 @@ results <- BHRM(X=X,Y=Y,U=U,profiles=profiles,
 library(MASS)
 # run the BHRM.g.interaction R script first
 # generate example data:
-numInd <- 1000
-numE <- 5
-numCov <- 2
-family="binomial"   # {"gaussian", "binomial"}
-w <- 0.9
+numInd <- 1000   # number of observations
+numE <- 5   # number of dxposures
+numCov <- 2   # number of covariates 
+family="binomial"   # Choose the model/outcome type from {"gaussian", "binomial"}
+w <- 0.9    # Specify the g-prior weight parameter. The overall shrinkage parameter G = w/(1-w)
 
-X <- mvrnorm(n=numInd, mu=rep(0,numE), Sigma=diag(numE))
-Y <- ifelse(rep(family,numInd)=="gaussian", rnorm(numInd, 0, 1), rbinom(numInd, 1, .5))
-U <- mvrnorm(n=numInd, mu=rep(0,numCov), Sigma=diag(numCov))
-profiles <- as.data.frame(c(0,1)*matrix(1, nrow=2, ncol=numE))
-n.adapt=5000; n.burnin=5000; n.sample=5000;
+X <- mvrnorm(n=numInd, mu=rep(0,numE), Sigma=diag(numE))   # generate exposures data
+Y <- ifelse(rep(family,numInd)=="gaussian", rnorm(numInd, 0, 1), rbinom(numInd, 1, .5))   # generate outcome data
+U <- mvrnorm(n=numInd, mu=rep(0,numCov), Sigma=diag(numCov))   # generate covariates data
+profiles <- as.data.frame(c(0,1)*matrix(1, nrow=2, ncol=numE))   # specify the contrasting profile (e.g., from -0.5 vs. 0.5)
+n.adapt=5000; n.burnin=5000; n.sample=5000;   # specify the number of iterations for the adaptation, length of burn-in, and number of random samples
 
-# run BHRM analysis
+# run BHRM analysis with pairwise interaction terms
 results <- BHRM.interaction(X=X,Y=Y,U=U,profiles=profiles,
                 family = family, w=w,
                 n.adapt=5000, n.burnin=5000, n.sample=5000)
