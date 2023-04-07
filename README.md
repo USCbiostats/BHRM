@@ -37,11 +37,12 @@ To use BHRM function, input variables are defined as:
 * Y: A N-length vector for a continuous outcome
 * U: A NxQ matrix of covariates (variables included in the regression model but not included in the g-estimation or model selection)
 * profiles: A 2xP matrix of two counterfactual profiles of exposures for which a potential outcomes risk difference is calculated (as the exposures are assumed to be standardized, these profiles should be on the standard normal scale)
-* family: a character string representing the type of outcome. Choose between "gaussian" or "binomial"
-* w: weight for g-prior: w -> 0 shrink to common mean; as w -> 1 toward the maximum likelihood estimate
-* n.adapt: number of iterations for the adaptation
-* n.burnin: length of burn-in
-* n.sample: number of random samples draws
+* family: a character string representing the type of outcome. Choose between "gaussian" or "binomial". Default is "gaussian".
+* w: weight for g-prior: w -> 0 shrink to common mean; as w -> 1 toward the maximum likelihood estimate. Default is 0.9.
+* n.adapt: number of iterations for the adaptation. Default is 5000.
+* n.burnin: length of burn-in. Default is 5000.
+* n.sample: number of random samples draws. Default is 5000.
+* selection: TRUE or FALSE indicating whether to conduct Bayesian stochastic variable selection for main effects. Default is FALSE.
 
 Output variables are defined as: 
 * beta: estimated coefficients for exposures effect
