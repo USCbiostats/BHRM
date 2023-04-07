@@ -78,7 +78,7 @@ n.adapt=5000; n.burnin=5000; n.sample=5000;   # specify the number of iterations
 
 # run BHRM analysis
 results <- BHRM(X=X,Y=Y,U=U,profiles=profiles,
-                family = family, w=w,
+                family = family, w=w, selection=T,
                 n.adapt=5000, n.burnin=5000, n.sample=5000)
 ```
 <img src="https://user-images.githubusercontent.com/33040114/211767507-9d618aaa-5497-49fa-908f-c35cb8201b84.png" width="290" height="300">
@@ -102,7 +102,7 @@ n.adapt=5000; n.burnin=5000; n.sample=5000;   # specify the number of iterations
 
 # run BHRM analysis with pairwise interaction terms
 results <- BHRM.interaction(X=X,Y=Y,U=U,profiles=profiles,
-                family = family, w=w,
+                family = family, w=w, selection=F,
                 n.adapt=5000, n.burnin=5000, n.sample=5000)
 ```
 <img src="https://user-images.githubusercontent.com/33040114/211767549-ae6308ca-e41d-42e7-9719-d76a310e00a8.png" width="300" height="600">

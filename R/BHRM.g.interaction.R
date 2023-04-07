@@ -27,7 +27,8 @@ BHRM.gaussian.interaction.model <-
   for(j in 1:P) {
     mu.beta[j] <- (1-gamma[j])*prop.mu.beta[j]  # prior means
     beta[j] <- b[j]*gamma[j]                    # effect multiplied by inclusion indicator
-    gamma[j] ~ dbern(pi)
+    gamma[j] <- ifelse(sel, gamma.tmp[j], 1)
+    gamma.tmp[j] ~ dbern(pi)
     for(k in 1:P) {
       T[j,k] <- gamma[j]*gamma[k]*prec.sigma.Y*XtX[j,k]/(G) + (1-gamma[j]*gamma[k])*equals(j,k)*pow(prop.sd.beta[j],-2)
     }
@@ -74,7 +75,8 @@ BHRM.logistic.interaction.model <-
   for(j in 1:P) {
     mu.beta[j] <- (1-gamma[j])*prop.mu.beta[j]
     beta[j] <- b[j]*gamma[j]
-    gamma[j] ~ dbern(pi)
+    gamma[j] <- ifelse(sel, gamma.tmp[j], 1)
+    gamma.tmp[j] ~ dbern(pi)
     for(k in 1:P) {
       T[j,k] <- gamma[j]*gamma[k]*XtX[j,k]/(G) + (1-gamma[j]*gamma[k])*equals(j,k)*pow(prop.sd.beta[j],-2)
     }
@@ -103,10 +105,11 @@ BHRM.logistic.interaction.model <-
 }"
 
 # MCMC procedure to update the Bayesian parameters and get the estimates for the model
-BHRM.interaction <- function(X=NULL, Y=NULL, U=NULL, profiles=NULL, family = "gaussian", w=0.9, n.adapt=5000, n.burnin=5000, n.sample=5000) {
+BHRM.interaction <- function(X=NULL, Y=NULL, U=NULL, profiles=NULL, family = "gaussian", w=0.9, selection=FALSE, n.adapt=5000, n.burnin=5000, n.sample=5000) {
   N <- length(Y)
   P <- ncol(X)
   Q <- ncol(U)
+  sel <- ifelse(selection, 1, 0) # used in JAGs as a ifelse statement for selection of main effects; interaction effects always have selection
   
   fmla <- as.formula(paste("~ -1 + (", paste(names(as.data.frame(X)), collapse="+"), ")^2", sep=""))
   X.full <- model.matrix(fmla, data=as.data.frame(X))
@@ -131,7 +134,7 @@ BHRM.interaction <- function(X=NULL, Y=NULL, U=NULL, profiles=NULL, family = "ga
   
   # run jags
   jags.model.text <- ifelse(family=="gaussian", BHRM.gaussian.interaction.model, BHRM.logistic.interaction.model)
-  jdata <- list(N=N, Y=Y, X=X, X.int=X.int, U=U, P=P, P.int=P.int, index.int=index.int, Q=Q, 
+  jdata <- list(N=N, Y=Y, X=X, X.int=X.int, U=U, P=P, P.int=P.int, sel=sel, index.int=index.int, Q=Q, 
                 profiles=profiles, profiles.int=profiles.int, XtX=XtX, w=w, prop.mu.beta=prop.mu.beta, prop.sd.beta=prop.sd.beta)
   var.s <- c("beta", "beta.int", "gamma", "gamma.int", "eta.low", "eta.high",  "psi")
   model.fit <- jags.model(file=textConnection(jags.model.text), data=jdata, n.chains=1, n.adapt=n.adapt, quiet=T)
