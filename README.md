@@ -50,6 +50,7 @@ Output variables are defined as:
 * gamma: PIPs for exposures
 * gamma.int: PIPs for interactions
 * eta.low/eta.high: contrasted profiles
+* psi: overall mixture effect
 
 
 For more information about how to install JAGS in R, please refer to : https://onlinelibrary.wiley.com/doi/pdf/10.1002/9781119287995.app1#:~:text=The%20following%20are%20the%20steps%20to%20install%20R%20package%20rjags,packages(%22rjags%22).
